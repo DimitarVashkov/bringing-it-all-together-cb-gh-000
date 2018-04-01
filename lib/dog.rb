@@ -52,4 +52,11 @@ class Dog
     dog
   end
 
+  def update
+    sql = "UPDATE dogs SET name = ?, breed =?"
+    DB[:conn].execute(sql, @name, @breed)
+    self  
+  end
+  
+
 end
