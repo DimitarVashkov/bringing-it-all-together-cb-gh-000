@@ -23,7 +23,7 @@ class Dog
   end
 
   def save
-    if @id 
+    if @id
       self.update
     else
     sql =  <<-SQL
