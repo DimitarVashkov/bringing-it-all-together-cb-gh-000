@@ -1,10 +1,10 @@
 class Dog
-  attr_accessor :name, :breed, :id 
+  attr_accessor :name, :breed, :id
 
   def initialize(name, breed, id=nil)
     @name = name
     @breed = breed
-    @id = id 
+    @id = id
   end
 
   def self.create_table
@@ -21,5 +21,15 @@ class Dog
   def self.drop_table
     DB[:conn].execute("DROP TABLE IF EXISTS dogs")
   end
-  
+
+  def save
+    sql =  <<-SQL
+      INSERT INTO dogs (name, breed)
+      VALUES (?, ?)
+    SQL
+    DB[:conn].execute(sql, @name, @breed)
+    @id = DB[:conn].execute("SELECT last_inserted_row() FROM dogs")[0][0]
+  end
+
+
 end
