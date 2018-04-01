@@ -1,7 +1,7 @@
 class Dog
   attr_accessor :name, :breed, :id
 
-  def initialize(name:, breed:, id=nil)
+  def initialize(name:, breed:, id: nil)
     @name = name
     @breed = breed
     @id = id
@@ -31,7 +31,7 @@ class Dog
     @id = DB[:conn].execute("SELECT last_inserted_row() FROM dogs")[0][0]
   end
 
-  def self.create(name,breed)
+  def self.create(name:,breed:)
     dog = Dog.new(name,breed)
     dog.save
     dog
